@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">ZEESY IMPERIAL COLLECTION</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandDark: '#0A0A0A',
+                        brandGold: '#D4AF37',
+                        brandGoldLight: '#F3E5AB',
+                        brandAccent: '#AA7C11'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 50%, #AA7C11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border-glow {
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-100 font-sans min-h-screen flex flex-col selection:bg-amber-500 selection:text-black">
+
+    <!-- Top Announcement Bar -->
+    <div id="top-bar" class="bg-gradient-to-r from-amber-600 via-amber-400 to-amber-600 text-black text-xs md:text-sm font-black py-2 px-4 text-center tracking-widest uppercase shadow-md">
+        ✨ Free Delivery Nationwide | Direct WhatsApp Ordering (0319 5887417)
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="sticky top-0 z-40 bg-black/95 backdrop-blur-md border-b border-amber-500/20 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+            
+            <!-- Luxury Brand Logo & Name (Z + Zeesy Badge) -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="filterCategory('All')">
+                <div id="header-logo-container" class="relative w-12 h-12 rounded-full bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 p-0.5 flex items-center justify-center shadow-lg gold-border-glow overflow-hidden">
+                    <div id="header-logo-inner" class="w-full h-full bg-black rounded-full flex flex-col items-center justify-center border border-amber-400/40">
+                        <span id="logo-letter-z" class="font-black text-amber-400 text-lg leading-none">Z</span>
+                        <span id="logo-text-zeesy" class="text-[8px] font-black tracking-tighter text-amber-200 uppercase -mt-0.5">Zeesy</span>
+                    </div>
+                    <img id="header-logo-img" src="" class="w-full h-full object-cover rounded-full hidden">
+                </div>
+                <div>
+                    <h1 id="brand-title" class="text-xl md:text-2xl font-black gold-gradient-text tracking-widest leading-none">ZEESY</h1>
+                    <p id="brand-sub" class="text-[10px] md:text-xs font-semibold text-amber-400/80 tracking-[0.3em] uppercase mt-1">IMPERIAL COLLECTION</p>
+                </div>
+            </div>
+
+            <!-- Header Action Buttons -->
+            <div class="flex items-center space-x-2 md:space-x-3">
+                <button onclick="shareStoreOnWhatsApp()" class="hidden sm:flex items-center space-x-1.5 bg-green-600 hover:bg-green-700 text-white text-xs px-3.5 py-2 rounded-xl font-bold transition shadow-lg">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> <span>Share</span>
+                </button>
+
+                <button onclick="openAdminModal()" class="bg-gray-900 hover:bg-gray-800 text-amber-400 border border-amber-500/30 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 shadow">
+                    <i class="fa-solid fa-user-shield text-xs"></i> <span>Admin Panel</span>
+                </button>
+
+                <button onclick="toggleCart()" class="relative bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black px-4 py-2 rounded-xl font-black transition flex items-center space-x-2 shadow-lg">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span id="cart-count" class="bg-black text-amber-400 rounded-full text-xs w-5 h-5 flex items-center justify-center font-black">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Store Section -->
+    <section class="max-w-7xl mx-auto px-4 py-6 w-full flex-1">
+        
+        <!-- Hero Luxury Banner -->
+        <div class="bg-gradient-to-r from-gray-950 via-gray-900 to-amber-950/30 border border-amber-500/30 rounded-3xl p-6 md:p-8 mb-8 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 gold-border-glow">
+            <div class="max-w-xl text-center md:text-left">
+                <span class="bg-amber-500/10 text-amber-400 text-xs font-bold px-3.5 py-1.5 rounded-full border border-amber-500/30 tracking-widest uppercase">Signature 2026 Release</span>
+                <h2 id="hero-heading" class="text-2xl md:text-4xl font-black text-white mt-3 leading-tight">Define Your Signature Elegance</h2>
+                <p id="store-desc" class="text-gray-400 text-sm mt-2">Discover handpicked premium apparel, trousers, hoodies, leather wallets, caps, and luxury bags. Instant WhatsApp ordering.</p>
+                
+                <!-- Category Filters -->
+                <div class="mt-6 flex flex-wrap gap-2 justify-center md:justify-start" id="category-bar">
+                    <button onclick="filterCategory('All')" class="cat-btn bg-amber-500 text-black text-xs font-bold px-4 py-2 rounded-xl transition">All Collection</button>
+                    <button onclick="filterCategory('Gents Trousers')" class="cat-btn bg-gray-900 hover:bg-gray-800 text-gray-300 text-xs font-bold px-4 py-2 rounded-xl border border-gray-800 transition">Gents Trousers</button>
+                    <button onclick="filterCategory('Ladies Trousers')" class="cat-btn bg-gray-900 hover:bg-gray-800 text-gray-300 text-xs font-bold px-4 py-2 rounded-xl border border-gray-800 transition">Ladies Trousers</button>
+                    <button onclick="filterCategory('Hoodies')" class="cat-btn bg-gray-900 hover:bg-gray-800 text-gray-300 text-xs font-bold px-4 py-2 rounded-xl border border-gray-800 transition">Hoodies</button>
+                    <button onclick="filterCategory('T-Shirts')" class="cat-btn bg-gray-900 hover:bg-gray-800 text-gray-300 text-xs font-bold px-4 py-2 rounded-xl border border-gray-800 transition">T-Shirts</button>
+                    <button onclick="filterCategory('Caps')" class="cat-btn bg-gray-900 hover:bg-gray-800 text-gray-300 text-xs font-bold px-4 py-2 rounded-xl border border-gray-800 transition">Caps</button>
+                    <button onclick="filterCategory('Wallets & Bags')" class="cat-btn bg-gray-900 hover:bg-gray-800 text-gray-300 text-xs font-bold px-4 py-2 rounded-xl border border-gray-800 transition">Wallets & Bags</button>
+                </div>
+            </div>
+
+            <!-- Store Info Concierge Box -->
+            <div class="bg-black/80 border border-amber-500/30 p-5 rounded-2xl text-center w-full md:w-80 backdrop-blur-md shadow-xl flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl mb-2 border border-amber-500/20">
+                    <i class="fa-solid fa-crown"></i>
+                </div>
+                <h3 class="text-sm font-bold text-white">VIP Order Desk</h3>
+                <p id="admin-display-contact" class="text-sm text-amber-400 font-mono font-bold mt-1">0319 5887417</p>
+                <p id="admin-display-address" class="text-xs text-gray-400 mt-1">Chakwal, Punjab, Pakistan</p>
+                <button onclick="shareStoreOnWhatsApp()" class="mt-4 w-full bg-green-600 hover:bg-green-700 text-white text-xs py-2.5 rounded-xl font-bold transition shadow-lg flex items-center justify-center space-x-2">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> <span>Direct WhatsApp Chat</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Products Grid Header -->
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xl font-black text-white flex items-center space-x-2">
+                <i class="fa-solid fa-gem text-amber-500"></i> 
+                <span id="category-heading-text" class="gold-gradient-text">Featured Catalogue</span>
+            </h3>
+            <span id="product-count" class="text-xs text-gray-400 font-mono">Showing items</span>
+        </div>
+
+        <!-- Dynamic Products Grid -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Populated via JavaScript -->
+        </div>
+    </section>
+
+    <!-- Shopping Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex justify-end">
+        <div class="bg-gray-950 w-full max-w-md h-full flex flex-col border-l border-amber-500/30 shadow-2xl p-6 overflow-y-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-gray-800">
+                <h3 class="text-lg font-black text-amber-400 flex items-center space-x-2">
+                    <i class="fa-solid fa-bag-shopping"></i> <span>Shopping Cart</span>
+                </h3>
+                <button onclick="toggleCart()" class="text-gray-400 hover:text-white p-2">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Cart Items Container -->
+            <div id="cart-items" class="flex-1 py-4 space-y-3 overflow-y-auto"></div>
+
+            <!-- Checkout Summary & Customer Details -->
+            <div id="cart-footer" class="border-t border-gray-800 pt-4 space-y-3">
+                <div class="bg-gray-900 p-4 rounded-2xl border border-gray-800 space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-400">Subtotal:</span>
+                        <span id="cart-subtotal" class="font-bold text-white">Rs. 0</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-400">Discount:</span>
+                        <span id="cart-discount" class="font-bold text-green-400">Rs. 0</span>
+                    </div>
+                    <div class="flex justify-between text-base border-t border-gray-800 pt-2">
+                        <span class="font-black text-amber-400">Total Amount:</span>
+                        <span id="cart-total" class="font-black text-amber-400">Rs. 0</span>
+                    </div>
+                </div>
+
+                <!-- Customer Order Form -->
+                <div class="space-y-2">
+                    <input type="text" id="cust-name" placeholder="Full Name" class="w-full bg-gray-900 border border-gray-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                    <input type="tel" id="cust-phone" placeholder="Phone / WhatsApp (e.g. 03195887417)" class="w-full bg-gray-900 border border-gray-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                    <textarea id="cust-address" placeholder="Complete Delivery Address & City" rows="2" class="w-full bg-gray-900 border border-gray-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500"></textarea>
+                    
+                    <div class="flex space-x-2">
+                        <input type="text" id="promo-code-input" placeholder="VIP Code (e.g. ZEESYVIP)" class="flex-1 bg-gray-900 border border-gray-800 rounded-xl px-3.5 py-2 text-sm text-white uppercase focus:outline-none focus:border-amber-500">
+                        <button onclick="applyPromoCode()" class="bg-gray-800 hover:bg-gray-700 text-amber-400 px-4 py-2 rounded-xl text-xs font-bold transition border border-amber-500/20">Apply</button>
+                    </div>
+                    <p id="promo-msg" class="text-xs text-green-400 hidden"></p>
+                </div>
+
+                <button onclick="checkoutWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center space-x-2 shadow-xl text-sm">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> <span>Confirm Order via WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="admin-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-gray-950 border border-amber-500/30 rounded-3xl w-full max-w-4xl max-h-[92vh] overflow-y-auto p-6 md:p-8 shadow-2xl relative text-gray-100">
+            <div class="flex items-center justify-between pb-4 border-b border-gray-800">
+                <h3 class="text-xl font-black text-amber-400 flex items-center space-x-2">
+                    <i class="fa-solid fa-sliders"></i> <span>Full Store Admin & Profile Manager</span>
+                </h3>
+                <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white p-2">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div class="py-6 space-y-8">
+                <!-- 1. Store Full Profile Management Section -->
+                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-4">
+                    <h4 class="text-base font-black text-amber-400 border-b border-gray-800 pb-2 flex items-center justify-between">
+                        <span><i class="fa-solid fa-id-card mr-2"></i> 1. Store Profile & Contact Details</span>
+                        <span class="text-xs font-normal text-gray-400">All fields editable</span>
+                    </h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-xs text-gray-400 block mb-1 font-bold">Brand Title Name</label>
+                            <input type="text" id="admin-brand-name" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-amber-500">
+                        </div>
+                        <div>
+                            <label class="text-xs text-gray-400 block mb-1 font-bold">Sub-Tagline / Subname</label>
+                            <input type="text" id="admin-sub-title" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-amber-500">
+                        </div>
+                        <div>
+                            <label class="text-xs text-gray-400 block mb-1 font-bold">WhatsApp / Cell Contact Number</label>
+                            <input type="text" id="admin-phone-input" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-amber-500">
+                        </div>
+                        <div>
+                            <label class="text-xs text-gray-400 block mb-1 font-bold">Admin Email Address</label>
+                            <input type="email" id="admin-email-input" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-amber-500">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="text-xs text-gray-400 block mb-1 font-bold">Complete Store Physical Address</label>
+                            <input type="text" id="admin-address-input" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-amber-500">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="text-xs text-gray-400 block mb-1 font-bold">Store Logo / Profile Picture Image URL</label>
+                            <input type="text" id="admin-logo-input" placeholder="Paste image link here" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-amber-500">
+                        </div>
+                    </div>
+                    <button onclick="saveStoreSettings()" class="bg-amber-500 hover:bg-amber-600 text-black text-xs font-bold px-5 py-3 rounded-xl transition shadow-lg">Save Profile Settings</button>
+                </div>
+
+                <!-- 2. Add New Item Section -->
+                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-4">
+                    <h4 class="text-base font-black text-amber-400 border-b border-gray-800 pb-2">
+                        <i class="fa-solid fa-plus-circle mr-2"></i> 2. Add New Product to Store
+                    </h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="text-xs text-gray-400 block mb-1">Product Title</label>
+                            <input type="text" id="new-p-name" placeholder="e.g. Executive Leather Bag" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white">
+                        </div>
+                        <div>
+                            <label class="text-xs text-gray-400 block mb-1">Category</label>
+                            <select id="new-p-cat" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white">
+                                <option value="Gents Trousers">Gents Trousers</option>
+                                <option value="Ladies Trousers">Ladies Trousers</option>
+                                <option value="Hoodies">Hoodies</option>
+                                <option value="T-Shirts">T-Shirts</option>
+                                <option value="Caps">Caps</option>
+                                <option value="Wallets & Bags">Wallets & Bags</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-xs text-gray-400 block mb-1">Price (Rs. 4,200 - 9,999)</label>
+                            <input type="number" id="new-p-price" placeholder="4999" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white">
+                        </div>
+                        <div>
+                            <label class="text-xs text-gray-400 block mb-1">Available Sizes (Comma Separated)</label>
+                            <input type="text" id="new-p-sizes" placeholder="S, M, L, XL (Leave blank for Bags/Caps)" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white">
+                        </div>
+                        <div>
+                            <label class="text-xs text-gray-400 block mb-1">Solo Product Picture URL</label>
+                            <input type="text" id="new-p-solo" placeholder="https://..." class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white">
+                        </div>
+                        <div>
+                            <label class="text-xs text-gray-400 block mb-1">Model Wearing Picture URL</label>
+                            <input type="text" id="new-p-model" placeholder="https://..." class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white">
+                        </div>
+                    </div>
+                    <button onclick="addNewProduct()" class="bg-green-600 hover:bg-green-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow">
+                        <i class="fa-solid fa-check"></i> Add Product
+                    </button>
+                </div>
+
+                <!-- 3. Edit & Delete Existing Products -->
+                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-4">
+                    <h4 class="text-base font-black text-amber-400 border-b border-gray-800 pb-2">
+                        <i class="fa-solid fa-list-check mr-2"></i> 3. Manage Existing Products (Edit & Delete)
+                    </h4>
+                    <div id="admin-products-list" class="space-y-4 max-h-96 overflow-y-auto pr-2">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-900 py-6 text-center text-xs text-gray-500">
+        <p id="footer-brand-text">© 2026 ZEESY IMPERIAL COLLECTION. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Initial Store Profile Settings
+        let storeConfig = JSON.parse(localStorage.getItem('storeConfig')) || {
+            brandName: "ZEESY",
+            subTitle: "IMPERIAL COLLECTION",
+            phone: "03195887417",
+            email: "admin@zeesy.com",
+            address: "Chakwal, Punjab, Pakistan",
+            logoUrl: ""
+        };
+
+        // Strict Catalogue Products (Only specified items, realistic prices Rs 4,200 - Rs 9,999)
+        let products = JSON.parse(localStorage.getItem('storeProducts')) || [
+            {
+                id: 1,
+                name: "Men's Executive Fit Tracksuits & Trousers",
+                category: "Gents Trousers",
+                price: 5499,
+                sizes: ["S", "M", "L", "XL"],
+                soloImg: "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=600&auto=format&fit=crop&q=80",
+                modelImg: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 2,
+                name: "Ladies Elegance Athleisure Trousers",
+                category: "Ladies Trousers",
+                price: 4899,
+                sizes: ["S", "M", "L"],
+                soloImg: "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=600&auto=format&fit=crop&q=80",
+                modelImg: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 3,
+                name: "Unisex Heavyweight Fleece Hoodie",
+                category: "Hoodies",
+                price: 6499,
+                sizes: ["M", "L", "XL"],
+                soloImg: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600&auto=format&fit=crop&q=80",
+                modelImg: "https://images.unsplash.com/photo-1548883354-7622d03aca27?w=600&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 4,
+                name: "Designer Imperial Cotton T-Shirt",
+                category: "T-Shirts",
+                price: 4200,
+                sizes: ["S", "M", "L", "XL"],
+                soloImg: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=80",
+                modelImg: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 5,
+                name: "Gold Crest Luxury Cap",
+                category: "Caps",
+                price: 4499,
+                sizes: [], // No size for Caps
+                soloImg: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=600&auto=format&fit=crop&q=80",
+                modelImg: "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=600&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 6,
+                name: "Genuine Leather Wallet & Luxury Purse Set",
+                category: "Wallets & Bags",
+                price: 8999,
+                sizes: [], // No size for Wallets & Bags
+                soloImg: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=600&auto=format&fit=crop&q=80",
+                modelImg: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&auto=format&fit=crop&q=80"
+            }
+        ];
+
+        let cart = [];
+        let activeCategory = 'All';
+        let appliedDiscountPercent = 0;
+        let selectedSizes = {}; // Tracks selected size per product ID
+        let activePhotoView = {}; // Tracks solo vs model photo view per product ID
+
+        window.onload = function() {
+            updateStoreUI();
+            renderProducts();
+            updateCartCount();
+        };
+
+        function updateStoreUI() {
+            document.getElementById('page-title').innerText = storeConfig.brandName + " " + storeConfig.subTitle;
+            document.getElementById('brand-title').innerText = storeConfig.brandName;
+            document.getElementById('brand-sub').innerText = storeConfig.subTitle;
+            document.getElementById('admin-display-contact').innerText = storeConfig.phone;
+            document.getElementById('admin-display-address').innerText = storeConfig.address;
+            document.getElementById('footer-brand-text').innerText = `© 2026 ${storeConfig.brandName} ${storeConfig.subTitle}. All Rights Reserved.`;
+
+            // Logo Image or Monogram emblem handler
+            const logoImg = document.getElementById('header-logo-img');
+            const logoInner = document.getElementById('header-logo-inner');
+            if(storeConfig.logoUrl && storeConfig.logoUrl.trim() !== "") {
+                logoImg.src = storeConfig.logoUrl;
+                logoImg.classList.remove('hidden');
+                logoInner.classList.add('hidden');
+            } else {
+                logoImg.classList.add('hidden');
+                logoInner.classList.remove('hidden');
+            }
+
+            // Fill Admin fields
+            document.getElementById('admin-brand-name').value = storeConfig.brandName;
+            document.getElementById('admin-sub-title').value = storeConfig.subTitle;
+            document.getElementById('admin-phone-input').value = storeConfig.phone;
+            document.getElementById('admin-email-input').value = storeConfig.email;
+            document.getElementById('admin-address-input').value = storeConfig.address;
+            document.getElementById('admin-logo-input').value = storeConfig.logoUrl || "";
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
+            
+            let filtered = activeCategory === 'All' ? products : products.filter(p => p.category === activeCategory);
+            document.getElementById('product-count').innerText = `Showing ${filtered.length} items`;
+            document.getElementById('category-heading-text').innerText = activeCategory === 'All' ? 'Signature Catalogue' : activeCategory;
+
+            filtered.forEach(product => {
+                // Determine photo mode (Default to solo image if available, fallback to model)
+                let currentPhoto = activePhotoView[product.id] === 'model' ? product.modelImg : product.soloImg;
+                let hasSizes = product.sizes && product.sizes.length > 0;
+
+                let sizeOptionsHTML = '';
+                if(hasSizes) {
+                    sizeOptionsHTML = `
+                        <div class="mt-3">
+                            <label class="text-[11px] text-gray-400 block mb-1 font-bold">Select Size:</label>
+                            <div class="flex flex-wrap gap-1.5">
+                                ${product.sizes.map(sz => `
+                                    <button onclick="selectSize(${product.id}, '${sz}')" id="size-btn-${product.id}-${sz}" 
+                                        class="size-pill-${product.id} px-2.5 py-1 text-xs rounded-lg font-bold border ${selectedSizes[product.id] === sz ? 'bg-amber-500 text-black border-amber-500' : 'bg-gray-950 text-gray-300 border-gray-800 hover:border-amber-500/50'} transition">
+                                        ${sz}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                grid.innerHTML += `
+                    <div class="bg-gray-950 border border-gray-900 rounded-3xl overflow-hidden shadow-xl flex flex-col hover:border-amber-500/40 transition duration-300">
+                        <!-- Image Frame with Photo Toggle -->
+                        <div class="h-64 overflow-hidden relative bg-black">
+                            <img id="product-img-${product.id}" src="${currentPhoto}" alt="${product.name}" class="w-full h-full object-cover">
+                            
+                            <!-- Category Badge -->
+                            <span class="absolute top-3 left-3 bg-black/80 backdrop-blur border border-amber-500/30 text-amber-400 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+                                ${product.category}
+                            </span>
+
+                            <!-- Image Toggle Controls -->
+                            <div class="absolute bottom-3 right-3 flex bg-black/80 backdrop-blur rounded-lg border border-amber-500/20 p-1 space-x-1 text-[10px]">
+                                <button onclick="switchPhoto(${product.id}, 'solo')" class="px-2 py-0.5 rounded font-bold ${activePhotoView[product.id] !== 'model' ? 'bg-amber-500 text-black' : 'text-gray-400 hover:text-white'} transition">Solo</button>
+                                <button onclick="switchPhoto(${product.id}, 'model')" class="px-2 py-0.5 rounded font-bold ${activePhotoView[product.id] === 'model' ? 'bg-amber-500 text-black' : 'text-gray-400 hover:text-white'} transition">Model</button>
+                            </div>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="p-5 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-white text-base leading-snug">${product.name}</h4>
+                                <p class="text-amber-400 font-black text-lg mt-1">Rs. ${product.price.toLocaleString()}</p>
+                                ${sizeOptionsHTML}
+                            </div>
+                            
+                            <button onclick="addToCart(${product.id})" class="mt-5 w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black text-xs font-black py-3 rounded-2xl transition shadow-lg flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-cart-plus"></i> <span>Add to Cart</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function switchPhoto(productId, mode) {
+            activePhotoView[productId] = mode;
+            let product = products.find(p => p.id === productId);
+            let imgElem = document.getElementById(`product-img-${productId}`);
+            if(imgElem && product) {
+                imgElem.src = mode === 'model' ? product.modelImg : product.soloImg;
+            }
+            renderProducts();
+        }
+
+        function selectSize(productId, size) {
+            selectedSizes[productId] = size;
+            document.querySelectorAll(`.size-pill-${productId}`).forEach(btn => {
+                btn.className = `size-pill-${productId} px-2.5 py-1 text-xs rounded-lg font-bold border bg-gray-950 text-gray-300 border-gray-800 hover:border-amber-500/50 transition`;
+            });
+            let activeBtn = document.getElementById(`size-btn-${productId}-${size}`);
+            if(activeBtn) {
+                activeBtn.className = `size-pill-${productId} px-2.5 py-1 text-xs rounded-lg font-bold border bg-amber-500 text-black border-amber-500 transition`;
+            }
+        }
+
+        function filterCategory(cat) {
+            activeCategory = cat;
+            renderProducts();
+        }
+
+        function addToCart(productId) {
+            let product = products.find(p => p.id === productId);
+            let hasSizes = product.sizes && product.sizes.length > 0;
+            let chosenSize = selectedSizes[productId];
+
+            if(hasSizes && !chosenSize) {
+                alert("Please select a size first!");
+                return;
+            }
+
+            let cartItemKey = hasSizes ? `${productId}-${chosenSize}` : `${productId}`;
+            let existing = cart.find(item => item.cartKey === cartItemKey);
+
+            if(existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    cartKey: cartItemKey,
+                    selectedSize: chosenSize || 'Standard',
+                    qty: 1
+                });
+            }
+            updateCartCount();
+            toggleCart();
+        }
+
+        function updateCartCount() {
+            let totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cart-count').innerText = totalQty;
+            renderCartItems();
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cart-items');
+            container.innerHTML = '';
+
+            if(cart.length === 0) {
+                container.innerHTML = `<p class="text-center text-gray-500 text-sm py-12">Your cart is empty.</p>`;
+                document.getElementById('cart-subtotal').innerText = "Rs. 0";
+                document.getElementById('cart-discount').innerText = "Rs. 0";
+                document.getElementById('cart-total').innerText = "Rs. 0";
+                return;
+            }
+
+            let subtotal = 0;
+            cart.forEach((item, index) => {
+                subtotal += item.price * item.qty;
+                container.innerHTML += `
+                    <div class="flex items-center justify-between bg-gray-900 p-3.5 rounded-2xl border border-gray-800">
+                        <div class="flex items-center space-x-3">
+                            <img src="${item.soloImg}" class="w-12 h-12 object-cover rounded-xl">
+                            <div>
+                                <h5 class="text-xs font-bold text-white">${item.name}</h5>
+                                <p class="text-[11px] text-amber-400 font-mono mt-0.5">Rs. ${item.price.toLocaleString()} ${item.selectedSize !== 'Standard' ? '| Size: ' + item.selectedSize : ''}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="changeQty(${index}, -1)" class="w-6 h-6 bg-gray-800 hover:bg-gray-700 text-white rounded-lg flex items-center justify-center text-xs font-bold">-</button>
+                            <span class="text-xs font-bold text-white px-1">${item.qty}</span>
+                            <button onclick="changeQty(${index}, 1)" class="w-6 h-6 bg-gray-800 hover:bg-gray-700 text-white rounded-lg flex items-center justify-center text-xs font-bold">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let discountAmount = (subtotal * appliedDiscountPercent) / 100;
+            let grandTotal = subtotal - discountAmount;
+
+            document.getElementById('cart-subtotal').innerText = `Rs. ${subtotal.toLocaleString()}`;
+            document.getElementById('cart-discount').innerText = `Rs. ${discountAmount.toLocaleString()} (${appliedDiscountPercent}%)`;
+            document.getElementById('cart-total').innerText = `Rs. ${grandTotal.toLocaleString()}`;
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if(cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartCount();
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('hidden');
+        }
+
+        function applyPromoCode() {
+            let code = document.getElementById('promo-code-input').value.trim().toUpperCase();
+            let msg = document.getElementById('promo-msg');
+            msg.classList.remove('hidden');
+
+            if(code === 'ZEESYVIP') {
+                appliedDiscountPercent = 15;
+                msg.innerText = "✨ 15% VIP Discount Applied!";
+                msg.className = "text-xs text-green-400 font-bold";
+            } else {
+                appliedDiscountPercent = 0;
+                msg.innerText = "❌ Invalid Promo Code";
+                msg.className = "text-xs text-red-400 font-bold";
+            }
+            renderCartItems();
+        }
+
+        function checkoutWhatsApp() {
+            let name = document.getElementById('cust-name').value.trim();
+            let phone = document.getElementById('cust-phone').value.trim();
+            let address = document.getElementById('cust-address').value.trim();
+
+            if(!name || !phone || !address) {
+                alert("Please fill in your Name, Phone Number & Address!");
+                return;
+            }
+            if(cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+
+            let subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            let discountAmount = (subtotal * appliedDiscountPercent) / 100;
+            let total = subtotal - discountAmount;
+
+            let orderText = `👑 *NEW ORDER - ${storeConfig.brandName} ${storeConfig.subTitle}* 👑\n\n` +
+                            `👤 *Customer Name:* ${name}\n` +
+                            `📞 *Phone:* ${phone}\n` +
+                            `📍 *Address:* ${address}\n\n` +
+                            `🛍️ *Order Items:* \n`;
+
+            cart.forEach((item, i) => {
+                let sizeStr = item.selectedSize !== 'Standard' ? ` [Size: ${item.selectedSize}]` : '';
+                orderText += `${i+1}. ${item.name}${sizeStr} (Qty: ${item.qty}) - Rs. ${(item.price * item.qty).toLocaleString()}\n`;
+            });
+
+            orderText += `\nSubtotal: Rs. ${subtotal.toLocaleString()}` +
+                         (appliedDiscountPercent > 0 ? `\nVIP Discount (${appliedDiscountPercent}%): -Rs. ${discountAmount.toLocaleString()}` : ``) +
+                         `\n*Grand Total: Rs. ${total.toLocaleString()}*`;
+
+            let targetPhone = storeConfig.phone.replace(/[^0-9]/g, '');
+            if(targetPhone.startsWith('0')) targetPhone = '92' + targetPhone.substring(1);
+
+            let whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(orderText)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function shareStoreOnWhatsApp() {
+            let shareText = `Check out *${storeConfig.brandName} ${storeConfig.subTitle}* for exclusive luxury apparel and accessories! Shop online now: ${window.location.href}`;
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+        }
+
+        // Admin Panel Functions
+        function openAdminModal() {
+            let pwd = prompt("Enter Admin Password:");
+            if(pwd === "123" || pwd === "admin123") {
+                document.getElementById('admin-modal').classList.remove('hidden');
+                renderAdminProducts();
+            } else if(pwd !== null) {
+                alert("Incorrect Password!");
+            }
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-modal').classList.add('hidden');
+        }
+
+        function saveStoreSettings() {
+            storeConfig.brandName = document.getElementById('admin-brand-name').value.trim();
+            storeConfig.subTitle = document.getElementById('admin-sub-title').value.trim();
+            storeConfig.phone = document.getElementById('admin-phone-input').value.trim();
+            storeConfig.email = document.getElementById('admin-email-input').value.trim();
+            storeConfig.address = document.getElementById('admin-address-input').value.trim();
+            storeConfig.logoUrl = document.getElementById('admin-logo-input').value.trim();
+
+            localStorage.setItem('storeConfig', JSON.stringify(storeConfig));
+            updateStoreUI();
+            alert("Full Store Profile Updated Successfully!");
+        }
+
+        function addNewProduct() {
+            let name = document.getElementById('new-p-name').value.trim();
+            let cat = document.getElementById('new-p-cat').value;
+            let price = parseInt(document.getElementById('new-p-price').value);
+            let sizesStr = document.getElementById('new-p-sizes').value.trim();
+            let soloImg = document.getElementById('new-p-solo').value.trim();
+            let modelImg = document.getElementById('new-p-model').value.trim();
+
+            if(!name || isNaN(price)) {
+                alert("Please enter a valid Product Title and Price!");
+                return;
+            }
+
+            let sizesArr = sizesStr ? sizesStr.split(',').map(s => s.trim().toUpperCase()).filter(s => s !== '') : [];
+
+            let newProduct = {
+                id: Date.now(),
+                name: name,
+                category: cat,
+                price: price,
+                sizes: sizesArr,
+                soloImg: soloImg || "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=80",
+                modelImg: modelImg || soloImg || "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600&auto=format&fit=crop&q=80"
+            };
+
+            products.push(newProduct);
+            localStorage.setItem('storeProducts', JSON.stringify(products));
+            renderProducts();
+            renderAdminProducts();
+
+            // Clear inputs
+            document.getElementById('new-p-name').value = '';
+            document.getElementById('new-p-price').value = '';
+            document.getElementById('new-p-sizes').value = '';
+            document.getElementById('new-p-solo').value = '';
+            document.getElementById('new-p-model').value = '';
+            alert("New product added successfully!");
+        }
+
+        function renderAdminProducts() {
+            const list = document.getElementById('admin-products-list');
+            list.innerHTML = '';
+            products.forEach((p, idx) => {
+                list.innerHTML += `
+                    <div class="bg-gray-950 p-4 rounded-2xl border border-gray-800 space-y-3 text-xs">
+                        <div class="flex justify-between items-center border-b border-gray-800 pb-2">
+                            <span class="text-white font-bold text-sm">${p.name}</span>
+                            <span class="text-amber-400 font-mono">ID: ${p.id}</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                            <div>
+                                <label class="text-gray-400 block mb-1">Product Title</label>
+                                <input type="text" id="p-edit-name-${idx}" value="${p.name}" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-2.5 py-1.5 text-white">
+                            </div>
+                            <div>
+                                <label class="text-gray-400 block mb-1">Price (Rs.)</label>
+                                <input type="number" id="p-edit-price-${idx}" value="${p.price}" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-2.5 py-1.5 text-white">
+                            </div>
+                            <div>
+                                <label class="text-gray-400 block mb-1">Sizes (comma separated)</label>
+                                <input type="text" id="p-edit-sizes-${idx}" value="${p.sizes ? p.sizes.join(', ') : ''}" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-2.5 py-1.5 text-white">
+                            </div>
+                            <div>
+                                <label class="text-gray-400 block mb-1">Solo Photo URL</label>
+                                <input type="text" id="p-edit-solo-${idx}" value="${p.soloImg}" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-2.5 py-1.5 text-white">
+                            </div>
+                            <div>
+                                <label class="text-gray-400 block mb-1">Model Photo URL</label>
+                                <input type="text" id="p-edit-model-${idx}" value="${p.modelImg}" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-2.5 py-1.5 text-white">
+                            </div>
+                        </div>
+                        <div class="flex space-x-2 pt-2">
+                            <button onclick="updateProduct(${idx})" class="flex-1 bg-amber-500 hover:bg-amber-600 text-black py-2 rounded-xl font-bold transition">Update Details</button>
+                            <button onclick="deleteProduct(${idx})" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl font-bold transition">Delete</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function updateProduct(idx) {
+            let name = document.getElementById(`p-edit-name-${idx}`).value.trim();
+            let price = parseInt(document.getElementById(`p-edit-price-${idx}`).value);
+            let sizesStr = document.getElementById(`p-edit-sizes-${idx}`).value.trim();
+            let solo = document.getElementById(`p-edit-solo-${idx}`).value.trim();
+            let model = document.getElementById(`p-edit-model-${idx}`).value.trim();
+
+            if(name) products[idx].name = name;
+            if(!isNaN(price)) products[idx].price = price;
+            products[idx].sizes = sizesStr ? sizesStr.split(',').map(s => s.trim().toUpperCase()) : [];
+            if(solo) products[idx].soloImg = solo;
+            if(model) products[idx].modelImg = model;
+
+            localStorage.setItem('storeProducts', JSON.stringify(products));
+            renderProducts();
+            renderAdminProducts();
+            alert("Product updated successfully!");
+        }
+
+        function deleteProduct(idx) {
+            if(confirm("Are you sure you want to delete this product?")) {
+                products.splice(idx, 1);
+                localStorage.setItem('storeProducts', JSON.stringify(products));
+                renderProducts();
+                renderAdminProducts();
+            }
+        }
+    </script>
+</body>
+</html>
